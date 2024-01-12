@@ -4,23 +4,21 @@
 import MySQLdb
 from sys import argv
 
-if __name__ == "__main__":
-    # Connect to MySQL server
-    db = MySQLdb.connect(host="localhost", user=argv[1], passwd=argv[2], port=3306, db=argv[3])
+# The code should not be executed when imported
+if __name__ == '__main__':
 
-    # Create a MySQL cursor
-    cursor = db.cursor()
+    # make a connection to the database
+    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                         passwd=argv[2], db=argv[3])
 
-    # Execute the MySQL query
-    cursor.execute("SELECT * FROM states ORDER BY id")
+    # It gives us the ability to have multiple seperate working environments
+    # through the same connection to the database.
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states")
 
-    # Fetch all the rows
-    rows = cursor.fetchall()
-
-    # Display the results
-    for row in rows:
-        print(row)
-
-    # Close cursor and database connection
-    cursor.close()
+    rows = cur.fetchall()
+    for i in rows:
+        print(i)
+    # Clean up process
+    cur.close()
     db.close()
