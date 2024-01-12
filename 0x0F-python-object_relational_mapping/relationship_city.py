@@ -7,7 +7,8 @@ from relationship_state import Base
 
 
 class City(Base):
-    """ the City class which inherits from Base class.
+    """
+        The ``City`` class which inherits from ``Base`` class.
     """
     __tablename__ = 'cities'
     id = Column(Integer, primary_key=True)
